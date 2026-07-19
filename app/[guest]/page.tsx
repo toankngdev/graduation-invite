@@ -95,13 +95,13 @@ export default async function FriendlyInvitation({ params }: PageProps) {
             <div className="space-y-1">
               <span className="text-sm font-mono uppercase tracking-wider text-[#8b949e]">Time</span>
               <p className="text-white font-sans font-semibold text-xl">{EVENT_CONFIG.date}</p>
-              <p className="text-base text-[#8b949e] font-sans">{EVENT_CONFIG.time}</p>
+              <p className="text-sm text-[#8b949e] font-sans">{EVENT_CONFIG.time}</p>
             </div>
 
             <div className="space-y-1">
               <span className="text-sm font-mono uppercase tracking-wider text-[#8b949e]">Location</span>
               <p className="text-white font-sans font-semibold text-xl">{EVENT_CONFIG.venue}</p>
-              <p className="text-base text-[#8b949e] font-sans leading-tight">
+              <p className="text-sm text-[#8b949e] font-sans leading-tight">
                 {EVENT_CONFIG.addressLine1}<br />
                 {EVENT_CONFIG.addressLine2}
               </p>
