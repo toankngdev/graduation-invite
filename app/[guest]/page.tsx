@@ -1,24 +1,34 @@
 import { notFound } from 'next/navigation';
-import React from 'react';
-import { EVENT_CONFIG } from '@/data/eventConfig';
+import { EVENT_CONFIG as PLACEHOLDER_CONFIG } from '@/data/eventConfig';
 import { GUEST_LIST } from '@/data/guestList';
 
-// Safe execution block to extract registry from production environments if hidden from GitHub
-const getGuests = (): typeof GUEST_LIST => {
-  if (process.env.GUEST_REGISTRY_JSON) {
+const getEventConfig = () => {
+  if (process.env.EVENT_CONFIG_JSON) {
     try {
-      return JSON.parse(process.env.GUEST_REGISTRY_JSON);
+      return JSON.parse(process.env.EVENT_CONFIG_JSON);
     } catch (e) {
-      console.error("Environment variable parsing failed, using default registry.", e);
+      console.error("Failed parsing EVENT_CONFIG_JSON", e);
+    }
+  }
+  return PLACEHOLDER_CONFIG;
+};
+
+const getGuestList = () => {
+  if (process.env.GUEST_LIST_JSON) {
+    try {
+      return JSON.parse(process.env.GUEST_LIST_JSON);
+    } catch (e) {
+      console.error("Failed parsing GUEST_LIST_JSON", e);
     }
   }
   return GUEST_LIST;
 };
 
-const ACTIVE_GET_LIST = getGuests();
+const EVENT_CONFIG = getEventConfig();
+const ACTIVE_GUEST_LIST = getGuestList();
 
 export function generateStaticParams() {
-  return Object.keys(ACTIVE_GET_LIST).map((key) => ({
+  return Object.keys(ACTIVE_GUEST_LIST).map((key) => ({
     guest: key,
   }));
 }
@@ -32,7 +42,7 @@ interface PageProps {
 export default async function FriendlyInvitation({ params }: PageProps) {
   const resolvedParams = await params;
   const guestKey = resolvedParams.guest.toLowerCase();
-  const guest = ACTIVE_GET_LIST[guestKey];
+  const guest = ACTIVE_GUEST_LIST[guestKey];
 
   if (!guest) {
     notFound();
