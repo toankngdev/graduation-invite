@@ -19,7 +19,8 @@ export const metadata: Metadata = {
     template: "%s | Graduation Invitation",
     default: "Graduation Invitation | Nguyen Khanh Toan",
   },
-  description: "Official graduation ceremony invitation for Nguyen Khanh Toan - Information Technology, Hoa Sen University.",
+  description:
+    "Official graduation ceremony invitation for Nguyen Khanh Toan - Information Technology, Hoa Sen University.",
   icons: {
     icon: "/favicon.ico",
   },

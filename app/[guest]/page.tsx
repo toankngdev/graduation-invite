@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EVENT_CONFIG as PLACEHOLDER_CONFIG } from "@/data/eventConfig";
 import { GUEST_LIST } from "@/data/guestList";
@@ -37,6 +38,30 @@ export const dynamicParams = false;
 
 interface PageProps {
   params: Promise<{ guest: string }>;
+}
+
+// Generates page metadata dynamically based on guest route parameters
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const guestKey = resolvedParams.guest.toLowerCase();
+  const guest = ACTIVE_GUEST_LIST[guestKey];
+
+  if (!guest) {
+    return {
+      title: "Guest",
+    };
+  }
+
+  return {
+    // Populates "%s" slot defined in root layout template
+    title: guest.name,
+    openGraph: {
+      title: `Graduation Invitation | ${guest.name}`,
+      description: `Graduation ceremony invitation for ${guest.name}.`,
+    },
+  };
 }
 
 export default async function FriendlyInvitation({ params }: PageProps) {
