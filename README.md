@@ -91,7 +91,7 @@ Contains general ceremony details.
   "venue": "The Grand Hall & Gardens",
   "addressLine1": "20 Ingram Street",
   "addressLine2": "Forest Hills, Queens, New York City",
-  "googleMapsUrl": "https://maps.app.goo.gl/DfJz56fhC5KuThzR6"
+  "detailsUrl": "https://maps.app.goo.gl/DfJz56fhC5KuThzR6"
 }
 ```
 
